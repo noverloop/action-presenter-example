@@ -22,6 +22,7 @@ end
 
 gem 'jquery-rails'
 gem "pry"
+gem "nashie"
 group :test do
   gem 'guard'
   gem 'guard-coffeescript'

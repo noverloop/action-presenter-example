@@ -11,6 +11,7 @@ Bundler.require(:default, :test)
 require File.expand_path("../../config/environment", __FILE__)
 require "rspec/rails"
 require "actions/test"
+require "factories"
 
 Dir["spec/support/**/*.rb"].each {|f| require f}
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration

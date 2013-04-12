@@ -1,6 +1,7 @@
 require "spec_helper"
 describe Actions::Posts::New do
-  let(:controller) { Object.new }
+  let (:params) { {:id => 10} }
+  let(:controller) { MockController.new(:params => params) }
   subject(:action) { Actions::Posts::New.new(controller) }
 
 
@@ -21,8 +22,9 @@ describe Actions::Posts::New do
   end
 
   it "should set a presenter" do
-    controller.should_receive(:presenter=).once
     action.execute!
+    controller.presenter.should_not be_nil
+    controller.presenter.should be_instance_of Post
   end
 
 
