@@ -8,7 +8,7 @@ module Actions
 
       def respond
         respond_to do |format|
-          format.html {redirect_to posts_url, notice: "Succesfully deleted"}
+          format.html {redirect_to rails.posts_url, notice: "Succesfully deleted"}
           format.json { render status: 200 }
         end
       end

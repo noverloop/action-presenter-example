@@ -37,6 +37,15 @@ so caching is postponed to the presenters logic because.. easier
       Rails.cache.fetch key, &block
     end
 
+    def self.preheat bool
+      @@cacheable = bool
+    end
+
+    def self.preheat?
+      !!@@cacheable
+    end
+
+
   private
     def expand_cache_key(*args)
       ActiveSupport::Cache.expand_cache_key args
