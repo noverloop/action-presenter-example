@@ -1,7 +1,4 @@
 class Presenter::Posts::Show < Presenter::Base
-
-   preheat true
-
    property :id, :required => false
    property :created_at, :required => false
    property :updated_at, :required => false

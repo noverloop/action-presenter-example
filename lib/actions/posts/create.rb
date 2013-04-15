@@ -9,15 +9,15 @@ module Actions
       end
 
       def present
-        self.presenter = @post
-        #Presenters::Posts::Post.new(@post, status: self.success)
+        self.presenter = Presenter::Posts::Create.new(@post, status: self.success)
       end
 
       def respond
          respond_to do |format|
             if success
+
               format.html { redirect_to @post, notice: 'Post was successfully created.' }
-              format.json { render json: presenter, status: :created, location: @post }
+              format.json { render json: presenter, status: :created, location: presenter.post }
             else
               format.html { render action: "new" }
               format.json { render json: presenter, status: :unprocessable_entity }

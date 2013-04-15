@@ -4,21 +4,22 @@ module Presenter
     include ActionView::Helpers
     include ActionView::Helpers::UrlHelper
 
+    def self.model klass
+      property klass.to_s.underscore.to_sym do
+        klass.attribute_names.each do |name|
+          property name.to_sym
+        end
 
-    cattr_accessor :cacheable
-    @@cacheable = false
+        def self.model_name
+          self.name.to_s.split(":").last
+        end
+      end
+
+    end
 
     def cache *args, &block
       key = expand_cache_key(args)
       Rails.cache.fetch key, &block
-    end
-
-    def self.preheat bool
-      @@cacheable = bool
-    end
-
-    def self.preheat?
-      !!@@cacheable
     end
 
     def default_url_options
