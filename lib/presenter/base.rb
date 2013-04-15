@@ -1,34 +1,10 @@
 module Presenter
   class Base < Hashie::Nash
-    include ActionView::Helpers
     include Rails.application.routes.url_helpers
+    include ActionView::Helpers
+    include ActionView::Helpers::UrlHelper
 
-=begin
-There are two major things to consider with presenters
-Factorisation, the creation of the presenter
-Caching and the ability of offline caching
-Actual viewlogic that is calculated from the coredata and helpers which generate html_safe view-items.
 
-So if we consider that the presenter contains
-1. core data
-2. caching logic
-3. dataspecific html-snippets. (aka. view helpers)
-
-In this case we can spec out the requirements needed for each part.
-
-The core data needs validation as a view may not render with lacking core-data
-- validated on initialization
-- cachable
-
-pseudo logic
-
-when the object recovers from cache we want to skip the super's initialize method
-when the object is not recovered from cache we want to initialize
-except
-
-so basically we want to override the initialize method
-so caching is postponed to the presenters logic because.. easier
-=end
     cattr_accessor :cacheable
     @@cacheable = false
 
@@ -43,6 +19,10 @@ so caching is postponed to the presenters logic because.. easier
 
     def self.preheat?
       !!@@cacheable
+    end
+
+    def default_url_options
+      { :host => "example.org", :only_path => true }
     end
 
 

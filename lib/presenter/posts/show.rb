@@ -11,10 +11,11 @@ class Presenter::Posts::Show < Presenter::Base
    property :model_name, :required => false, :default => "Post"
    property :posts_link
    property :presenter_created_at
+   property :url
 
    def initialize(post)
      hash = cache post do
-        post.attributes.merge(:posts_link => link_to('here',post), :presenter_created_at => Time.now.to_i)
+        post.attributes.merge(:posts_link => link_to('posts',:controller => :posts, :action => :index), :presenter_created_at => Time.now.to_i, :url => root_url)
      end
      super hash
    end
